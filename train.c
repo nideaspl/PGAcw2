@@ -122,7 +122,7 @@ char* input(int length) {
     char* expression = (char*)malloc(length * sizeof(char));
     if (expression == NULL) {
         fprintf(stderr, "Memory allocation failed.\n");
-        exit(0);
+        return NULL;
     }
 
     int i = 0;
@@ -233,14 +233,14 @@ void addStation(struct Station **head, const char *name) {
     struct Station *newStation = (struct Station *)malloc(sizeof(struct Station));
     if (newStation == NULL) {
         perror("Memory allocation error");
-        exit(0);
+        return;
     }
 
     // Allocate memory for the station name
     newStation->name = (char *)malloc(strlen(name) + 1);
     if (newStation->name == NULL) {
         perror("Memory allocation error");
-        exit(0);
+        return;
     }
 
     strcpy(newStation->name, name);
@@ -346,6 +346,28 @@ int main() {
     // Remember to free the allocated memory when done
     free(inputMatrixline);
     if(matrixIndex==-1){
+
+        for (int i = 0; i < stationNumber; i++) {
+            free(distanceMatrix[i]);
+        }
+        free(distanceMatrix);
+        // Free the allocated memory
+         freeStations(stationList);
+
+        for (int i = 0; i < stationNumber; i++) {
+            free(distanceMatrix[i]);
+        }
+        free(distanceMatrix);
+        // Free the allocated memory
+        freeStations(stationList);
+
+        for (int i = 0; i < stationNumber; i++) {
+            free(distanceMatrix[i]);
+        }
+        free(distanceMatrix);
+        // Free the allocated memory
+        freeStations(stationList);
+
         return 0;
     }   
     }
@@ -355,6 +377,14 @@ int main() {
     scanf("%[^,],%s", source, destination);
     if (strlen(source) == 0 || strlen(destination) == 0 || isdigit(*source) || isdigit(*destination)) {
         printf("Invalid source station.");
+
+        for (int i = 0; i < stationNumber; i++) {
+        free(distanceMatrix[i]);
+        }
+        free(distanceMatrix);
+        // Free the allocated memory
+        freeStations(stationList);
+
         return 0;
     }
     // Find the index of source and destination in the stationList
@@ -363,12 +393,36 @@ int main() {
 
     if (sourceIndex == -1 ) {
         printf("Invalid source station.");
+
+        for (int i = 0; i < stationNumber; i++) {
+            free(distanceMatrix[i]);
+        }
+        free(distanceMatrix);
+        // Free the allocated memory
+        freeStations(stationList);
+
         return 0;
     }else if (destIndex == -1) {
         printf("Invalid destination station.");
+    
+        for (int i = 0; i < stationNumber; i++) {
+            free(distanceMatrix[i]);
+        }
+        free(distanceMatrix);
+        // Free the allocated memory
+        freeStations(stationList);
+
         return 0;
     }else if (strcmp(source, destination) == 0) {// Check if the source and destination are the same
         printf("No journey, same source and destination station.");
+ 
+        for (int i = 0; i < stationNumber; i++) {
+            free(distanceMatrix[i]);
+        }
+        free(distanceMatrix);
+        // Free the allocated memory
+        freeStations(stationList);
+
         return 0;
     }
     sourceIndex=stationNumber-(sourceIndex+1);
@@ -378,6 +432,14 @@ int main() {
     //printf("Destination Index: %d\n", destIndex);
     Result result =dijkstra(stationNumber, sourceIndex, destIndex);
     if(result.err==-1){
+            free(result.path);
+        for (int i = 0; i < stationNumber; i++) {
+            free(distanceMatrix[i]);
+        }
+        free(distanceMatrix);
+        // Free the allocated memory
+        freeStations(stationList);
+
     return 0;
    }
     // printf("Path: ");
