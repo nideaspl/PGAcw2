@@ -352,22 +352,7 @@ int main() {
         }
         free(distanceMatrix);
         // Free the allocated memory
-         freeStations(stationList);
-
-        for (int i = 0; i < stationNumber; i++) {
-            free(distanceMatrix[i]);
-        }
-        free(distanceMatrix);
-        // Free the allocated memory
         freeStations(stationList);
-
-        for (int i = 0; i < stationNumber; i++) {
-            free(distanceMatrix[i]);
-        }
-        free(distanceMatrix);
-        // Free the allocated memory
-        freeStations(stationList);
-
         return 0;
     }   
     }
